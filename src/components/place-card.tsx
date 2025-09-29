@@ -1,15 +1,7 @@
-type PlaceCardProps = {
-  isPremium: boolean;
-  isBookmarked: boolean;
-  imageSrc: string;
-  price: number;
-  title: string;
-  starsCount: number;
-  cardType: string;
-};
+import {PlaceCardProps} from './place-card-props.tsx';
 
 
-export function PlaceCard({isPremium, imageSrc, price, isBookmarked, starsCount, title, cardType}: PlaceCardProps): JSX.Element {
+export function PlaceCard({isPremium, imageSrc, price, isBookmarked, rating, cardName, cardType}: PlaceCardProps): JSX.Element {
   const bookmarkButtonClassName = `${isBookmarked ? 'place-card__bookmark-button--active' : ''} button`;
   const bookmarkStatus = `${isBookmarked ? 'In bookmarks' : ''} To bookmarks`;
 
@@ -18,7 +10,8 @@ export function PlaceCard({isPremium, imageSrc, price, isBookmarked, starsCount,
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div>}
+        </div>
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={imageSrc} width="260" height="200" alt="Place image" />
@@ -41,12 +34,12 @@ export function PlaceCard({isPremium, imageSrc, price, isBookmarked, starsCount,
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${starsCount * 20}%` }}></span>
+            <span style={{ width: `${rating * 20}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <a href="#">{cardName}</a>
         </h2>
         <p className="place-card__type">{cardType}</p>
       </div>

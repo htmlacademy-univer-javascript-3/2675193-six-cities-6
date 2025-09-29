@@ -1,4 +1,4 @@
-import {PlaceCard} from '../components/place-card';
+import {PlaceCard} from '../../components/place-card.tsx';
 
 
 type MainScreenProps = {
@@ -101,8 +101,8 @@ function MainScreen({placesCount}: MainScreenProps): JSX.Element {
                   isBookmarked={false}
                   imageSrc="img/apartment-01.jpg"
                   price={120}
-                  title="Beautiful &amp; luxurious apartment at great location"
-                  starsCount={4}
+                  cardName="Beautiful &amp; luxurious apartment at great location"
+                  rating={4}
                   cardType="Apartment"
                 />
 
@@ -111,8 +111,8 @@ function MainScreen({placesCount}: MainScreenProps): JSX.Element {
                   isBookmarked
                   imageSrc="img/room.jpg"
                   price={80}
-                  title="Wood and stone place"
-                  starsCount={4}
+                  cardName="Wood and stone place"
+                  rating={4}
                   cardType="Room"
                 />
                 <PlaceCard
@@ -120,8 +120,8 @@ function MainScreen({placesCount}: MainScreenProps): JSX.Element {
                   isBookmarked={false}
                   imageSrc="img/apartment-02.jpg"
                   price={132}
-                  starsCount={4}
-                  title='Canal View Prinsengracht'
+                  rating={4}
+                  cardName='Canal View Prinsengracht'
                   cardType='Apartment'
                 />
 
@@ -130,8 +130,8 @@ function MainScreen({placesCount}: MainScreenProps): JSX.Element {
                   isBookmarked={false}
                   imageSrc="img/apartment-03.jpg"
                   price={180}
-                  starsCount={5}
-                  title='Nice, cozy, warm big bed apartment'
+                  rating={5}
+                  cardName='Nice, cozy, warm big bed apartment'
                   cardType='Apartment'
                 />
 
@@ -140,8 +140,8 @@ function MainScreen({placesCount}: MainScreenProps): JSX.Element {
                   isBookmarked
                   imageSrc="img/room.jpg"
                   price={80}
-                  starsCount={4}
-                  title='Wood and stone place'
+                  rating={4}
+                  cardName='Wood and stone place'
                   cardType='Room'
                 />
               </div>
