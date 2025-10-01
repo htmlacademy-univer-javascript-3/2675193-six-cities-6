@@ -10,8 +10,7 @@ export function PlaceCard({isPremium, imageSrc, price, isBookmarked, rating, car
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div>
-      }
+        </div> }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={imageSrc} width="260" height="200" alt="Place image" />
