@@ -1,7 +1,8 @@
 import {PlaceCardProps} from './place-card-props.tsx';
+import {Link} from 'react-router-dom';
+import {AppRoute} from './const.ts';
 
-
-export function PlaceCard({isPremium, imageSrc, price, isBookmarked, rating, cardName, cardType}: PlaceCardProps): JSX.Element {
+export function PlaceCard({id, isPremium, imageSrc, price, isBookmarked, rating, cardName, cardType}: PlaceCardProps): JSX.Element {
   const bookmarkButtonClassName = `${isBookmarked ? 'place-card__bookmark-button--active' : ''} button`;
   const bookmarkStatus = `${isBookmarked ? 'In bookmarks' : ''} To bookmarks`;
 
@@ -38,7 +39,7 @@ export function PlaceCard({isPremium, imageSrc, price, isBookmarked, rating, car
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{cardName}</a>
+          <Link to={AppRoute.Offer + id}>{cardName}</Link>
         </h2>
         <p className="place-card__type">{cardType}</p>
       </div>
