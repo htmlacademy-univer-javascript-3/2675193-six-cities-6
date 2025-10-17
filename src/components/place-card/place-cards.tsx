@@ -1,4 +1,4 @@
-import {PlaceCardProps} from './place-card-props.tsx';
+import {PlaceCardProps} from './place-card-props.ts';
 import {PlaceCard} from './place-card.tsx';
 import {useState} from 'react';
 

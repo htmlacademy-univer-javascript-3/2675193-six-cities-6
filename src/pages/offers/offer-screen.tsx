@@ -1,7 +1,7 @@
 import {Offer} from '../../mocks/offer.ts';
 import {JSX} from 'react/jsx-runtime';
 import IntrinsicAttributes = JSX.IntrinsicAttributes;
-import CommentForm from '../../components/comment-form.tsx';
+import CommentForm from '../../components/comments/comment-form.tsx';
 
 export function OfferScreen(offer: Offer|IntrinsicAttributes): JSX.Element {
   return (
@@ -66,7 +66,7 @@ export function OfferScreen(offer: Offer|IntrinsicAttributes): JSX.Element {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  {'name' in offer ? offer.name : ''}
+                  {'title' in offer ? offer.title : ''}
                   Beautiful &amp; luxurious studio at great location
                 </h1>
                 <button className="offer__bookmark-button button" type="button">

@@ -1,5 +1,5 @@
-import PlaceCards from '../../components/place-cards.tsx';
-import {PlaceCardProps} from '../../components/place-card-props.tsx';
+import PlaceCards from '../../components/place-card/place-cards.tsx';
+import {PlaceCardProps} from '../../components/place-card/place-card-props.ts';
 
 
 type MainScreenProps = {

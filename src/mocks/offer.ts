@@ -3,16 +3,18 @@ import {Location} from './location.ts';
 
 export type Offer = {
   id: string;
-  name: string;
+  title: string;
   type: 'apartment' | 'room' | 'hotel' | 'house';
   price: number;
   city: City | null;
   location: Location | null;
-  isBookmarked: boolean;
+  isFavorite: boolean;
   isPremium: boolean;
   rating: number;
   previewImage: string;
+  description: string;
   bedrooms: number;
-  peoplesCountMax: number;
-  inside: string;
+  goods: [string];
+  images: [string];
+  maxAdults: number;
 };

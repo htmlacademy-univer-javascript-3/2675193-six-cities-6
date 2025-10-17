@@ -6,7 +6,7 @@ import {OfferScreen} from '../pages/offers/offer-screen.tsx';
 import {AppRoute, AuthorizationStatus} from './const.ts';
 import {PrivateRoute} from './private-route.tsx';
 import {NotFoundScreen} from '../pages/not-found/not-found-screen.tsx';
-import {PlaceCardProps} from './place-card-props.tsx';
+import {PlaceCardProps} from './place-card/place-card-props.ts';
 
 type AppProps = {
   placesCount: number;

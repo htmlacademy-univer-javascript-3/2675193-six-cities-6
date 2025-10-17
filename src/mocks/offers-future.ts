@@ -2,16 +2,15 @@ import {Offer} from './offer.ts';
 
 export const offersFuture : Offer[] = [{
   id: '1',
-  isBookmarked: false,
+  isFavorite: false,
   isPremium: true,
-  previewImage: '',
   price: 120,
   rating: 4.8,
-  name: 'Beautiful &amp; luxurious studio at great location',
+  title: 'Beautiful &amp; luxurious studio at great location',
   type: 'apartment',
-  peoplesCountMax: 4,
+  maxAdults: 4,
   bedrooms: 3,
-  inside: 'Wi-Fi\n' +
+  goods: ['Wi-Fi\n' +
     'Washing machine\n' +
     'Towels\n' +
     'Heating\n' +
@@ -20,21 +19,22 @@ export const offersFuture : Offer[] = [{
     'Kitchen\n' +
     'Dishwasher\n' +
     'Cabel TV\n' +
-    'Fridge',
+    'Fridge'],
   city: null,
-  location: null
+  location: null,
+  description: '',
+  images: ['']
 },{
   id: '2',
-  isBookmarked: false,
+  isFavorite: false,
   isPremium: true,
-  previewImage: '',
   price: 20,
   rating: 1.2,
-  name: 'Worth hostel',
+  title: 'Worth hostel',
   type: 'apartment',
-  peoplesCountMax: 1,
+  maxAdults: 1,
   bedrooms: 0,
-  inside: 'Wi-Fi\n' +
+  goods: ['Wi-Fi\n' +
     'Washing machine\n' +
     'Towels\n' +
     'Heating\n' +
@@ -43,21 +43,22 @@ export const offersFuture : Offer[] = [{
     'Kitchen\n' +
     'Dishwasher\n' +
     'Cabel TV\n' +
-    'Fridge',
+    'Fridge'],
   city: null,
-  location: null
+  location: null,
+  description: '',
+  images: ['']
 },{
   id: '3',
-  isBookmarked: false,
+  isFavorite: false,
   isPremium: true,
-  previewImage: '',
   price: 200,
   rating: 4.2,
-  name: 'BDSM Hotel',
+  title: 'BDSM Hotel',
   type: 'hotel',
-  peoplesCountMax: 1,
+  maxAdults: 1,
   bedrooms: 0,
-  inside: 'Wi-Fi\n' +
+  goods: ['Wi-Fi\n' +
     'Washing machine\n' +
     'Towels\n' +
     'Heating\n' +
@@ -66,21 +67,22 @@ export const offersFuture : Offer[] = [{
     'Kitchen\n' +
     'Dishwasher\n' +
     'Cabel TV\n' +
-    'Fridge',
+    'Fridge'],
   city: null,
-  location: null
+  location: null,
+  description: '',
+  images: ['']
 },{
   id: '4',
-  isBookmarked: false,
+  isFavorite: false,
   isPremium: true,
-  previewImage: '',
   price: 20,
   rating: 1.2,
-  name: 'Worth hostel',
+  title: 'Worth hostel',
   type: 'apartment',
-  peoplesCountMax: 1,
+  maxAdults: 1,
   bedrooms: 0,
-  inside: 'Wi-Fi\n' +
+  goods: ['Wi-Fi\n' +
     'Washing machine\n' +
     'Towels\n' +
     'Heating\n' +
@@ -89,8 +91,10 @@ export const offersFuture : Offer[] = [{
     'Kitchen\n' +
     'Dishwasher\n' +
     'Cabel TV\n' +
-    'Fridge',
+    'Fridge'],
   city: null,
-  location: null
+  location: null,
+  description: '',
+  images: ['']
 }
 ];
