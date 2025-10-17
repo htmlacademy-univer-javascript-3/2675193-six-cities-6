@@ -23,7 +23,8 @@ export const offersFuture : Offer[] = [{
   city: null,
   location: null,
   description: '',
-  images: ['']
+  images: [''],
+  previewImage: ''
 },{
   id: '2',
   isFavorite: false,
@@ -47,7 +48,8 @@ export const offersFuture : Offer[] = [{
   city: null,
   location: null,
   description: '',
-  images: ['']
+  images: [''],
+  previewImage: ''
 },{
   id: '3',
   isFavorite: false,
@@ -71,7 +73,8 @@ export const offersFuture : Offer[] = [{
   city: null,
   location: null,
   description: '',
-  images: ['']
+  images: [''],
+  previewImage: ''
 },{
   id: '4',
   isFavorite: false,
@@ -95,6 +98,7 @@ export const offersFuture : Offer[] = [{
   city: null,
   location: null,
   description: '',
-  images: ['']
+  images: [''],
+  previewImage: ''
 }
 ];
