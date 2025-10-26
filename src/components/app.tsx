@@ -22,7 +22,8 @@ export function App({placesCount, offers}: AppProps): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><FavoritesScreen placeCards={offers}/>
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <FavoritesScreen placeCards={offers.filter((place) => place.isFavorite)}/>
             </PrivateRoute>
           }
         />

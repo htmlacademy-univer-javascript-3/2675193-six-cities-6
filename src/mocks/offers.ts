@@ -2,7 +2,7 @@ import {Offer} from '../types/offer.ts';
 
 export const offers : Offer[] = [{
   id: '1',
-  isFavorite: false,
+  isFavorite: true,
   isPremium: true,
   previewImage: 'img/apartment-01.jpg',
   smallImageSrc: 'img/apartment-small-03.jpg',
@@ -48,10 +48,10 @@ export const offers : Offer[] = [{
   },
 },{
   id: '3',
-  isFavorite: false,
+  isFavorite: true,
   isPremium: false,
   previewImage: 'img/apartment-02.jpg',
-  smallImageSrc: '/img/apartment-small-04.jpg',
+  smallImageSrc: 'img/apartment-small-04.jpg',
   price: 132,
   rating: 4,
   title: 'White Castle',
