@@ -1,9 +1,9 @@
-import {PlaceCardProps} from './place-card-props.ts';
 import {PlaceCard} from './place-card.tsx';
 import {useState} from 'react';
+import {Offer} from '../../types/offer.ts';
 
 type PlaceCardsProps = {
-  cardsProps: PlaceCardProps[];
+  cardsProps: Offer[];
 }
 
 export default function PlaceCards({cardsProps}: PlaceCardsProps) {

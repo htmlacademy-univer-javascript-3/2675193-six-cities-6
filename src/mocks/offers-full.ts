@@ -1,6 +1,6 @@
-import {Offer} from './offer.ts';
+import {FullOffer} from '../types/fullOffer.ts';
 
-export const offersFuture : Offer[] = [{
+export const offersFull : FullOffer[] = [{
   id: '1',
   isFavorite: false,
   isPremium: true,

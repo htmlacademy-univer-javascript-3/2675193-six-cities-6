@@ -1,9 +1,9 @@
-import {Offer} from '../../mocks/offer.ts';
+import {FullOffer} from '../../types/fullOffer.ts';
 import {JSX} from 'react/jsx-runtime';
 import IntrinsicAttributes = JSX.IntrinsicAttributes;
-import CommentForm from '../../components/comments/comment-form.tsx';
+import CommentForm from '../../components/comment-form/comment-form.tsx';
 
-export function OfferScreen(offer: Offer|IntrinsicAttributes): JSX.Element {
+export function OfferScreen(offer: FullOffer|IntrinsicAttributes): JSX.Element {
   return (
     <div className="page">
       <header className="header">

@@ -13,3 +13,4 @@ root.render(
     <App placesCount={placesCount} offers={offers}/>
   </React.StrictMode>
 );
+

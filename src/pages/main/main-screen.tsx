@@ -1,10 +1,10 @@
 import PlaceCards from '../../components/place-card/place-cards.tsx';
-import {PlaceCardProps} from '../../components/place-card/place-card-props.ts';
+import {Offer} from '../../types/offer.ts';
 
 
 type MainScreenProps = {
   placesCount: number;
-  placeCards: PlaceCardProps[];
+  placeCards: Offer[];
 }
 
 export function MainScreen({placesCount, placeCards}: MainScreenProps): JSX.Element {

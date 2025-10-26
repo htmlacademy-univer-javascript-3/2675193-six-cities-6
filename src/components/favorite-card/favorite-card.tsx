@@ -1,8 +1,8 @@
-import {PlaceCardProps} from '../place-card/place-card-props.ts';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../const.ts';
+import {Offer} from '../../types/offer.ts';
 
-export default function FavoriteCard({id, isPremium, smallImageSrc, price, rating, title, type}: PlaceCardProps){
+export default function FavoriteCard({id, isPremium, smallImageSrc, price, rating, title, type}: Offer){
   const starsWidth = `${rating * 20}%`;
   return (
     <article className="favorites__card place-card">

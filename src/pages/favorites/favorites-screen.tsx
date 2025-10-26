@@ -1,10 +1,10 @@
 import FavoriteCard from '../../components/favorite-card/favorite-card.tsx';
-import {PlaceCardProps} from '../../components/place-card/place-card-props.ts';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../components/const.ts';
+import {Offer} from '../../types/offer.ts';
 
 type FavoriteScreenProps = {
-  placeCards: PlaceCardProps[];
+  placeCards: Offer[];
 }
 
 export function FavoritesScreen({placeCards}: FavoriteScreenProps): JSX.Element {
@@ -53,7 +53,7 @@ export function FavoritesScreen({placeCards}: FavoriteScreenProps): JSX.Element 
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {placeCards.map((placeCard: PlaceCardProps) => (<FavoriteCard key={placeCard.id} {...placeCard}/>))}
+                  {placeCards.map((placeCard: Offer) => (<FavoriteCard key={placeCard.id} {...placeCard}/>))}
                 </div>
               </li>
 
