@@ -11,16 +11,16 @@ export const offers : Offer[] = [{
   title: 'Beautiful &amp; luxurious studio at great location',
   type: 'Apartment',
   city: {
-    name: 'Paris',
+    name: 'Amsterdam',
     location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
       zoom: 13
     }
   },
   location: {
-    latitude: 48.87561,
-    longitude: 2.375499,
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
     zoom: 16
   },
 },{
@@ -34,16 +34,16 @@ export const offers : Offer[] = [{
   title: 'Wood and stone place',
   type: 'Room',
   city: {
-    name: 'Dusseldorf',
+    name: 'Amsterdam',
     location: {
-      latitude: 51.225402,
-      longitude: 6.776314,
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
       zoom: 13
     }
   },
   location: {
-    latitude: 51.225402,
-    longitude: 6.784314,
+    latitude: 52.3609553943508,
+    longitude: 4.85309666406198,
     zoom: 16
   },
 },{
@@ -57,16 +57,16 @@ export const offers : Offer[] = [{
   title: 'White Castle',
   type: 'Hotel',
   city: {
-    name: 'Paris',
+    name: 'Amsterdam',
     location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
       zoom: 13
     }
   },
   location: {
-    latitude: 48.868610000000004,
-    longitude: 2.342499,
+    latitude: 52.3909553943508,
+    longitude: 4.929309666406198,
     zoom: 16
   },
 },{
@@ -80,16 +80,16 @@ export const offers : Offer[] = [{
   title: 'Nice, cozy, warm big bed apartment',
   type: 'Apartment',
   city: {
-    name: 'Paris',
+    name: 'Amsterdam',
     location: {
-      latitude: 48.85661,
-      longitude: 2.351499,
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
       zoom: 13
     }
   },
   location: {
-    latitude: 48.84461,
-    longitude: 2.374499,
+    latitude: 52.3809553943508,
+    longitude: 4.939309666406198,
     zoom: 16
   },
 }

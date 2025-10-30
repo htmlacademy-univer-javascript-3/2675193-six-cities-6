@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../const.ts';
+import {Routes} from '../const.ts';
 import {Offer} from '../../types/offer.ts';
 
 export default function FavoriteCard({id, isPremium, smallImageSrc, price, rating, title, type}: Offer){
@@ -35,7 +35,7 @@ export default function FavoriteCard({id, isPremium, smallImageSrc, price, ratin
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer + id}>{title}</Link>
+          <Link to={Routes.Offer + id}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
