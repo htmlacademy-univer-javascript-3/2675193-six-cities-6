@@ -1,9 +1,10 @@
-import {PlaceCardProps} from './place-card-props.tsx';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../const.ts';
+import {Offer} from '../../types/offer.ts';
 
-
-export function PlaceCard({isPremium, imageSrc, price, isBookmarked, rating, cardName, cardType}: PlaceCardProps): JSX.Element {
-  const bookmarkButtonClassName = `${isBookmarked ? 'place-card__bookmark-button--active' : ''} button`;
-  const bookmarkStatus = `${isBookmarked ? 'In bookmarks' : ''} To bookmarks`;
+export function PlaceCard({id, isPremium, previewImage, price, isFavorite, rating, title, type}: Offer): JSX.Element {
+  const bookmarkButtonClassName = `${isFavorite ? 'place-card__bookmark-button--active' : ''} button`;
+  const bookmarkStatus = `${isFavorite ? 'In bookmarks' : ''} To bookmarks`;
 
   return (
     <article className="cities__card place-card">
@@ -13,7 +14,7 @@ export function PlaceCard({isPremium, imageSrc, price, isBookmarked, rating, car
         </div> }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={imageSrc} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -38,9 +39,9 @@ export function PlaceCard({isPremium, imageSrc, price, isBookmarked, rating, car
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{cardName}</a>
+          <Link to={AppRoute.Offer + id}>{title}</Link>
         </h2>
-        <p className="place-card__type">{cardType}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
