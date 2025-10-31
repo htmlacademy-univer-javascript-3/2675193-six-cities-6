@@ -1,5 +1,8 @@
 import PlaceCards from '../../components/place-card/place-cards.tsx';
 import {Offer} from '../../types/offer.ts';
+import {useState} from 'react';
+import {Nullable} from 'vitest';
+import {Map} from '../../components/map/map.tsx';
 
 
 type MainScreenProps = {
@@ -8,6 +11,7 @@ type MainScreenProps = {
 }
 
 export function MainScreen({placesCount, placeCards}: MainScreenProps): JSX.Element {
+  const [activeOffer, setActiveOffer] = useState<Nullable<Offer>>(null);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -97,10 +101,24 @@ export function MainScreen({placesCount, placeCards}: MainScreenProps): JSX.Elem
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <PlaceCards cardsProps={placeCards}/>
+              <PlaceCards cardsProps={placeCards} setActiveCardCb={setActiveOffer}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                city={placeCards[0].city}
+                points={placeCards.map((x) => ({
+                  location: x.location,
+                  id: x.id,
+                }))}
+                selectedPoint={
+                  activeOffer
+                    ? {
+                      location: activeOffer.location,
+                      id: activeOffer.id,
+                    }
+                    : undefined
+                }
+              />
             </div>
           </div>
         </div>

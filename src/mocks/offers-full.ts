@@ -20,11 +20,26 @@ export const offersFull : FullOffer[] = [{
     'Dishwasher\n' +
     'Cabel TV\n' +
     'Fridge'],
-  city: null,
-  location: null,
+  city: {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 13
+    }
+  },
+  location: {
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
+    zoom: 16
+  },
   description: '',
   images: [''],
-  previewImage: ''
+  host: {
+    name: 'Name',
+    avatarUrl: '',
+    isPro: false
+  }
 },{
   id: '2',
   isFavorite: false,
@@ -45,11 +60,26 @@ export const offersFull : FullOffer[] = [{
     'Dishwasher\n' +
     'Cabel TV\n' +
     'Fridge'],
-  city: null,
-  location: null,
+  city: {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 13
+    }
+  },
+  location: {
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
+    zoom: 16
+  },
   description: '',
   images: [''],
-  previewImage: ''
+  host: {
+    name: 'Name',
+    avatarUrl: '',
+    isPro: false
+  }
 },{
   id: '3',
   isFavorite: false,
@@ -70,11 +100,26 @@ export const offersFull : FullOffer[] = [{
     'Dishwasher\n' +
     'Cabel TV\n' +
     'Fridge'],
-  city: null,
-  location: null,
+  city: {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 13
+    }
+  },
+  location: {
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
+    zoom: 16
+  },
   description: '',
   images: [''],
-  previewImage: ''
+  host: {
+    name: 'Name',
+    avatarUrl: '',
+    isPro: false
+  }
 },{
   id: '4',
   isFavorite: false,
@@ -95,10 +140,25 @@ export const offersFull : FullOffer[] = [{
     'Dishwasher\n' +
     'Cabel TV\n' +
     'Fridge'],
-  city: null,
-  location: null,
+  city: {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 13
+    }
+  },
+  location: {
+    latitude: 52.3909553943508,
+    longitude: 4.85309666406198,
+    zoom: 16
+  },
   description: '',
   images: [''],
-  previewImage: ''
+  host: {
+    name: 'Name',
+    avatarUrl: '',
+    isPro: false
+  }
 }
 ];

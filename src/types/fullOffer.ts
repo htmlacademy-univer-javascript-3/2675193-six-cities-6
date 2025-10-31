@@ -1,14 +1,11 @@
 import {Offer} from './offer.ts';
+import {Host} from './host.ts';
 
-export type FullOffer = Omit<Offer, 'previewImage'> & {
+export type FullOffer = Omit<Offer, 'previewImage' | 'smallImageSrc'> & {
   description: string;
   bedrooms: number;
   goods: [string];
-  host: {
-    name: string;
-    avatarUrl: string;
-    isPro: boolean;
-  };
+  host: Host;
   images: [string];
   maxAdults: number;
 };
