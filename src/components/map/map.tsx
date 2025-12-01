@@ -1,13 +1,12 @@
 import {useEffect, useRef} from 'react';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {City} from '../../types/city.ts';
 import {Point} from '../../types/point.ts';
 import {useMap} from '../../hooks/use-map.tsx';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../const.ts';
+import {useAppSelector} from '../../hooks/store-hooks.ts';
 
 type MapProps = {
-  city: City;
   points: Point[];
   selectedPoint: Point | undefined;
 };
@@ -24,12 +23,14 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-export function Map({ city, points, selectedPoint }: MapProps): JSX.Element {
+export function Map({ points, selectedPoint }: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const activeCity = useAppSelector((state) => state.city);
+  const map = useMap(mapRef, activeCity);
 
   useEffect(() => {
     if (map) {
+      map.setView([activeCity.location.latitude, activeCity.location.longitude]);
       const markerLayer = layerGroup().addTo(map);
       points.forEach((point) => {
         new Marker({
@@ -46,7 +47,7 @@ export function Map({ city, points, selectedPoint }: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint]);
+  }, [map, points, selectedPoint, activeCity]);
 
   return <section className="cities__map map" ref={mapRef}></section>;
 }
