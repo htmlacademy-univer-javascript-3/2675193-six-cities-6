@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {Routes} from '../const.ts';
+import {Routes} from '../../const.ts';
 import {Offer} from '../../types/offer.ts';
 
 export function PlaceCard({id, isPremium, previewImage, price, isFavorite, rating, title, type}: Offer): JSX.Element {

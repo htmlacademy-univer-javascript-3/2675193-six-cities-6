@@ -2,18 +2,20 @@ import {createReducer} from '@reduxjs/toolkit';
 import {City} from '../types/city.ts';
 import {Offer} from '../types/offer.ts';
 import {offers} from '../mocks/offers.ts';
-import {updateCity, updateOffers} from './actions.ts';
+import {setLoadingStatus, updateCity, updateOffers} from './actions.ts';
 import {cities} from '../mocks/cities.ts';
 
 
 type State = {
   city: City;
   offers: Offer[];
+  loadingStatus: boolean;
 }
 
 const initialState: State = {
   city: cities[0],
   offers: offers,
+  loadingStatus: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -23,5 +25,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateOffers, (state, action) => {
       state.offers = action.payload.offers;
+    })
+    .addCase(setLoadingStatus, (state, action) => {
+      state.loadingStatus = action.payload;
     });
 });

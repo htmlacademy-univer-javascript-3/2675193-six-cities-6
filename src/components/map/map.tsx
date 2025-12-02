@@ -3,7 +3,7 @@ import {Icon, layerGroup, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Point} from '../../types/point.ts';
 import {useMap} from '../../hooks/use-map.tsx';
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../const.ts';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const.ts';
 import {useAppSelector} from '../../hooks/store-hooks.ts';
 
 type MapProps = {

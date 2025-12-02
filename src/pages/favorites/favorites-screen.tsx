@@ -1,6 +1,6 @@
 import FavoriteCard from '../../components/favorite-card/favorite-card.tsx';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../components/const.ts';
+import {AppRoute} from '../../const.ts';
 import {Offer} from '../../types/offer.ts';
 
 type FavoriteScreenProps = {

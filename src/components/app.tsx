@@ -3,16 +3,26 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {LoginScreen} from '../pages/login/login-screen.tsx';
 import {FavoritesScreen} from '../pages/favorites/favorites-screen.tsx';
 import {OfferScreen} from '../pages/offers/offer-screen.tsx';
-import {AppRoute, AuthorizationStatus} from './const.ts';
+import {AppRoute, AuthorizationStatus} from '../const.ts';
 import {PrivateRoute} from './private-route.tsx';
 import {NotFoundScreen} from '../pages/not-found/not-found-screen.tsx';
-import {Offer} from '../types/offer.ts';
+import {fetchOffersAction} from '../store/api-actions.ts';
+import {store} from '../store';
+import {useAppSelector} from '../hooks/store-hooks.ts';
+import {Spinner} from './spinner.tsx';
 
-type AppProps = {
-  offers: Offer[];
-}
+store.dispatch(fetchOffersAction());
 
-export function App({offers}: AppProps): JSX.Element {
+export function App(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const isLoading = useAppSelector((state) => state.loadingStatus);
+
+  if (isLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
