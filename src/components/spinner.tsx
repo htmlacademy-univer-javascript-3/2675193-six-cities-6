@@ -50,9 +50,10 @@ export function Spinner() {
       <div style={{
         ...ringStyle,
         animation: 'spin 8s linear infinite'
-      }}>
+      }}
+      >
         {emojis.map((emoji, index) => (
-          <div key={index} style={emojiStyle(index)}>
+          <div key={emoji} style={emojiStyle(index)}>
             {emoji}
           </div>
         ))}
