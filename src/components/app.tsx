@@ -9,15 +9,14 @@ import {NotFoundScreen} from '../pages/not-found/not-found-screen.tsx';
 import {Offer} from '../types/offer.ts';
 
 type AppProps = {
-  placesCount: number;
   offers: Offer[];
 }
 
-export function App({placesCount, offers}: AppProps): JSX.Element {
+export function App({offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Root} element={<MainScreen placesCount={placesCount} placeCards={offers}/>} />
+        <Route path={AppRoute.Root} element={<MainScreen />} />
         <Route path={AppRoute.Login} element={<LoginScreen />}/>
         <Route
           path={AppRoute.Favorites}
