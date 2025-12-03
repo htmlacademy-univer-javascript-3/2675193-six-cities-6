@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {Routes} from '../const.ts';
+import {Routes} from '../../const.ts';
 import {Offer} from '../../types/offer.ts';
 
 export default function FavoriteCard({id, isPremium, smallImageSrc, price, rating, title, type}: Offer){
