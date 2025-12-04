@@ -8,6 +8,4 @@ export const updateOffers = createAction<{ offers: Offer[] }>('updateOffers');
 
 export const setLoadingStatus = createAction<boolean>('data/setLoadingStatus');
 
-export const updateAuthStatus = createAction<AuthorizationStatus>('auth/updateAuthStatus');
-export const updateEmail = createAction<string>('auth/updateEmail');
 export const redirectToRoute = createAction<AppRoute>('game/redirectToRoute');

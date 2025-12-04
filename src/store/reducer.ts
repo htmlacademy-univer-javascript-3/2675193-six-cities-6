@@ -5,25 +5,6 @@ import {setLoadingStatus, updateAuthStatus, updateCity, updateEmail, updateOffer
 import {cities} from '../mocks/cities.ts';
 import {AppRoute, AuthorizationStatus} from '../const.ts';
 
-
-type State = {
-  city: City;
-  offers: Offer[];
-  loadingStatus: boolean;
-  authorizationStatus: AuthorizationStatus;
-  email: string;
-  appRoute: AppRoute;
-}
-
-const initialState: State = {
-  city: cities[0],
-  offers: [],
-  loadingStatus: false,
-  authorizationStatus: AuthorizationStatus.Unknown,
-  email: '',
-  appRoute: AppRoute.Root,
-};
-
 export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(updateCity, (state, action) => {
