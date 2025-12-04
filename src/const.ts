@@ -31,5 +31,5 @@ export enum APIRoute {
   SetFavourite = '/favorite/{offerId}/{status}',
   Comments = '/comments/{offerId}',
   Login = '/login',
-  LogOut = '/logout'
+  Logout = '/logout',
 }
