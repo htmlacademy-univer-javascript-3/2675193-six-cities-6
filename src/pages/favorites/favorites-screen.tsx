@@ -3,12 +3,11 @@ import {Offer} from '../../types/offer.ts';
 import Header from '../../components/header.tsx';
 import {AppRoute} from '../../const.ts';
 import {Link} from 'react-router-dom';
+import {useAppSelector} from '../../hooks/store-hooks.ts';
+import {getFavoriteOffers} from '../../store/site-data/selectors.ts';
 
-type FavoriteScreenProps = {
-  placeCards: Offer[];
-}
-
-export function FavoritesScreen({placeCards}: FavoriteScreenProps): JSX.Element {
+export function FavoritesScreen(): JSX.Element {
+  const placeCards = useAppSelector(getFavoriteOffers);
   const citiesFavoriteOffers = placeCards.reduce(
     (cityToCards: { [city: string]: Offer[] }, offer) => {
       const cardCityName = offer.city.name;

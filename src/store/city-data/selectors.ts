@@ -1,0 +1,5 @@
+import {State} from '../../types/state.ts';
+import {City} from '../../types/city.ts';
+import {NameSpace} from '../../const.ts';
+
+export const getCity = (state : State) : City => state[NameSpace.City].city;

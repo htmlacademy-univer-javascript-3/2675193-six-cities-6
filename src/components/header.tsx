@@ -1,14 +1,16 @@
 import {useAppSelector} from '../hooks/store-hooks.ts';
 import {AppRoute, AuthorizationStatus} from '../const.ts';
 import {Link} from 'react-router-dom';
+import {getAuthorizationStatus, getEmail} from '../store/user-data/selectors.ts';
+import React from 'react';
 
 type HeaderProps = {
   fromRoot: boolean;
 }
 
-export default function Header({fromRoot}: HeaderProps) {
-  const authStatus = useAppSelector((state) => state.authorizationStatus);
-  const userEmail = useAppSelector((state) => state.email);
+function Header({fromRoot}: HeaderProps) {
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const userEmail = useAppSelector(getEmail);
   return (
     <header className="header">
       <div className="container">
@@ -57,3 +59,6 @@ export default function Header({fromRoot}: HeaderProps) {
     </header>
   );
 }
+
+const HeaderMemo = React.memo(Header);
+export default HeaderMemo;
