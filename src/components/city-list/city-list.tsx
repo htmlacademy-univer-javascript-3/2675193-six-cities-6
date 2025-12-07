@@ -1,19 +1,17 @@
 import {City} from '../../types/city.ts';
+import {updateCity} from '../../store/actions.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
-import {getCity} from '../../store/site-data/selectors.ts';
-import {updateCity} from '../../store/site-data/site-data.ts';
-import React from 'react';
 
 type CityListProps = {
   cities: City[];
 }
 
-function CityList({cities}: CityListProps) {
-  const currentCity = useAppSelector(getCity);
+export default function CityList({cities}: CityListProps) {
+  const currentCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
 
   function cityOnClick(city: City) {
-    dispatch(updateCity(city));
+    dispatch(updateCity({city}));
   }
 
   return (
@@ -36,7 +34,3 @@ function CityList({cities}: CityListProps) {
     </div>
   );
 }
-
-const CityListMemo = React.memo(CityList);
-
-export default CityListMemo;

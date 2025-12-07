@@ -1,29 +1,23 @@
 import PlaceCards from '../../components/place-card/place-cards.tsx';
 import {Offer} from '../../types/offer.ts';
-import {useCallback, useMemo, useState} from 'react';
+import {useState} from 'react';
 import {Nullable} from 'vitest';
 import {Map} from '../../components/map/map.tsx';
+import CityList from '../../components/city-list/city-list.tsx';
 import {cities} from '../../mocks/cities.ts';
 import {useAppSelector} from '../../hooks/store-hooks.ts';
-import HeaderMemo from '../../components/header.tsx';
-import {getCity, getOffersInActiveCity} from '../../store/site-data/selectors.ts';
-import CityListMemo from '../../components/city-list/city-list.tsx';
+import Header from '../../components/header.tsx';
 
 export function MainScreen(): JSX.Element {
-  const activeCity = useAppSelector(getCity);
-  const placeCards = useAppSelector(getOffersInActiveCity);
-  const mapPoints = useMemo(() => placeCards.map((x) => ({
-    location: x.location,
-    id: x.id,
-  })), [placeCards]);
+  const activeCity = useAppSelector((state) => state.city);
+  const placeCards = useAppSelector((state) => state.offers.filter((o) => o.city.name === activeCity.name));
   const [activeOffer, setActiveOffer] = useState<Nullable<Offer>>(null);
-  const setActiveOfferCb = useCallback((offer: Nullable<Offer>) => setActiveOffer(offer), []);
   return (
     <div className="page page--gray page--main">
-      <HeaderMemo fromRoot />
+      <Header fromRoot />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <CityListMemo cities={cities}/>
+        <CityList cities={cities}/>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
@@ -44,11 +38,14 @@ export function MainScreen(): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <PlaceCards placeCards={placeCards} setActiveCardCb={setActiveOfferCb}/>
+              <PlaceCards cardsProps={placeCards} setActiveCardCb={setActiveOffer}/>
             </section>
             <div className="cities__right-section">
               <Map
-                points={mapPoints}
+                points={placeCards.map((x) => ({
+                  location: x.location,
+                  id: x.id,
+                }))}
                 selectedPoint={
                   activeOffer
                     ? {

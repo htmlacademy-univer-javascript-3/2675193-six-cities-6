@@ -3,12 +3,12 @@ import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
 import {FormEvent, useRef} from 'react';
 import {checkAuthAction, loginAction} from '../../store/api-actions.ts';
-import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
+import {updateEmail} from '../../store/actions.ts';
 
 export function LoginScreen(): JSX.Element {
   checkAuthAction();
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  if (authorizationStatus === AuthorizationStatus.Auth){
+  const a = useAppSelector((state) => state.authorizationStatus);
+  if (a === AuthorizationStatus.Auth){
     // eslint-disable-next-line react-hooks/rules-of-hooks
     //useNavigate()(AppRoute.Root);
   }
@@ -23,6 +23,7 @@ export function LoginScreen(): JSX.Element {
         login: loginRef.current.value,
         password: passwordRef.current.value
       }));
+      dispatch(updateEmail(loginRef.current.value));
     }
   };
 

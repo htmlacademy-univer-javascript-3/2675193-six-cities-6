@@ -1,18 +1,18 @@
-import PlaceCardMemo from './place-card.tsx';
+import {PlaceCard} from './place-card.tsx';
 import {useState} from 'react';
 import {Offer} from '../../types/offer.ts';
 import {Nullable} from 'vitest';
 
 type PlaceCardsProps = {
-  placeCards: Offer[];
+  cardsProps: Offer[];
   setActiveCardCb: (offer: Nullable<Offer>) => void;
 }
 
-export default function PlaceCards({placeCards, setActiveCardCb}: PlaceCardsProps) {
+export default function PlaceCards({cardsProps, setActiveCardCb}: PlaceCardsProps) {
   const [activeCardId, setActiveCardId] = useState<string>('');
   return (
     <div className="cities__places-list places__list tabs__content">
-      {placeCards.map((place) => (
+      {cardsProps.map((place) => (
         <div key={place.id}
           onMouseOver={() => {
             setActiveCardCb(place);
@@ -25,7 +25,7 @@ export default function PlaceCards({placeCards, setActiveCardCb}: PlaceCardsProp
           style={{boxShadow: activeCardId === place.id ? 'black 0 0 20px' : 'none',
             zIndex: activeCardId === place.id ? 10000 : 0}}
         >
-          <PlaceCardMemo key={place.id} {...place}/>
+          <PlaceCard key={place.id} {...place}/>
         </div>
       ))}
     </div>
