@@ -12,18 +12,16 @@ import {useAppSelector} from '../hooks/store-hooks.ts';
 import {Spinner} from './spinner.tsx';
 import browserHistory from '../browser-history.ts';
 import HistoryRouter from '../history-router.tsx';
-import {getLoadingStatus,} from '../store/site-data/selectors.ts';
-import {getAuthorizationStatus, getUserLoadingStatus} from '../store/user-data/selectors.ts';
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
 
 export function App(): JSX.Element {
-  const isLoading = useAppSelector(getLoadingStatus);
-  const isUserLoading = useAppSelector(getUserLoadingStatus);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offers = useAppSelector((state) => state.offers);
+  const isLoading = useAppSelector((state) => state.loadingStatus);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  if (isLoading || isUserLoading) {
+  if (isLoading) {
     return (
       <Spinner />
     );
@@ -38,7 +36,7 @@ export function App(): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
-              <FavoritesScreen/>
+              <FavoritesScreen placeCards={offers.filter((place) => place.isFavorite)}/>
             </PrivateRoute>
           }
         />

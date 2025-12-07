@@ -5,7 +5,6 @@ import {Point} from '../../types/point.ts';
 import {useMap} from '../../hooks/use-map.tsx';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const.ts';
 import {useAppSelector} from '../../hooks/store-hooks.ts';
-import {getCity} from '../../store/site-data/selectors.ts';
 
 type MapProps = {
   points: Point[];
@@ -26,18 +25,12 @@ const currentCustomIcon = new Icon({
 
 export function Map({ points, selectedPoint }: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const activeCity = useAppSelector(getCity);
+  const activeCity = useAppSelector((state) => state.city);
   const map = useMap(mapRef, activeCity);
 
   useEffect(() => {
     if (map) {
       map.setView([activeCity.location.latitude, activeCity.location.longitude]);
-    }
-  },
-  [map, activeCity]);
-
-  useEffect(() => {
-    if (map) {
       const markerLayer = layerGroup().addTo(map);
       points.forEach((point) => {
         new Marker({
@@ -54,7 +47,7 @@ export function Map({ points, selectedPoint }: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint]);
+  }, [map, points, selectedPoint, activeCity]);
 
   return <section className="cities__map map" ref={mapRef}></section>;
 }

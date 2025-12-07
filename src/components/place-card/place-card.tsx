@@ -1,9 +1,8 @@
 import {Link} from 'react-router-dom';
 import {Routes} from '../../const.ts';
 import {Offer} from '../../types/offer.ts';
-import React from 'react';
 
-function PlaceCard({id, isPremium, previewImage, price, isFavorite, rating, title, type}: Offer): JSX.Element {
+export function PlaceCard({id, isPremium, previewImage, price, isFavorite, rating, title, type}: Offer): JSX.Element {
   const bookmarkButtonClassName = `${isFavorite ? 'place-card__bookmark-button--active' : ''} button`;
   const bookmarkStatus = `${isFavorite ? 'In bookmarks' : ''} To bookmarks`;
 
@@ -47,7 +46,3 @@ function PlaceCard({id, isPremium, previewImage, price, isFavorite, rating, titl
     </article>
   );
 }
-
-const PlaceCardMemo = React.memo(PlaceCard);
-export default PlaceCardMemo;
-
