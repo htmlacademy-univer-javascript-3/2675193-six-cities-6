@@ -7,6 +7,8 @@ import {dropToken, saveToken} from '../services/token.ts';
 import {UserData} from '../types/user-data.ts';
 import {AuthData} from '../types/auth-data.ts';
 import {State} from '../types/state.ts';
+import {Review, ReviewPost} from '../types/review.ts';
+import {FullOffer} from '../types/fullOffer.ts';
 
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
@@ -19,6 +21,54 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     return data;
   },
+);
+
+export const fetchOfferAction = createAsyncThunk<FullOffer, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (id, {extra: api}) => {
+    const {data} = await api.get<FullOffer>(`${APIRoute.Offers}/${id}`);
+    return data;
+  },
+);
+
+export const fetchOfferNearby = createAsyncThunk<Offer[], string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOfferNearby',
+  async (id, {extra: api}) => {
+    const {data} = await api.get<Offer[]>(`${APIRoute.Offers}/${id}/nearby`);
+    return data;
+  },
+);
+
+export const getReviewsAction = createAsyncThunk<Review[], string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/getReviews',
+  async (id, {extra: api}) => {
+    const {data} = await api.get<Review[]>(APIRoute.Comments.replace('{offerId}', id));
+    return data;
+  },
+);
+
+export const sendReviewAction = createAsyncThunk<Review, ReviewPost, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/sendReview',
+  async ({id, comment, rating}, {extra: api}) => {
+    const {data} = await api.post<Review>(APIRoute.Comments.replace('{offerId}', id), {comment, rating});
+    return data;
+  }
 );
 
 export const checkAuthAction = createAsyncThunk<UserData, undefined, {

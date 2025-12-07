@@ -1,10 +1,40 @@
-import {FullOffer} from '../../types/fullOffer.ts';
-import {JSX} from 'react/jsx-runtime';
-import IntrinsicAttributes = JSX.IntrinsicAttributes;
 import CommentForm from '../../components/comment-form/comment-form.tsx';
 import Header from '../../components/header.tsx';
+import ReviewsMemo from '../../components/review/reviews.tsx';
+import {Map} from '../../components/map/map.tsx';
+import {fetchOfferAction, fetchOfferNearby, getReviewsAction} from '../../store/api-actions.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
+import {getComments, getNearby, getOffer} from '../../store/offers-data/selectors.ts';
+import {getCity} from '../../store/city-data/selectors.ts';
+import {useEffect, useMemo} from 'react';
+import {useParams} from 'react-router-dom';
 
-export function OfferScreen(offer: FullOffer|IntrinsicAttributes): JSX.Element {
+export function OfferScreen(): JSX.Element {
+  const {id} = useParams<{ id: string }>();
+
+  const reviews = useAppSelector(getComments);
+  const offer = useAppSelector(getOffer);
+  const activeCity = useAppSelector(getCity);
+  const nearby = useAppSelector(getNearby);
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    if (offer.id !== id){
+      dispatch(fetchOfferAction(id));
+      dispatch(getReviewsAction(id));
+      dispatch(fetchOfferNearby(id));
+    }
+  }, [id, dispatch]);
+
+
+  const mapPoints = useMemo(() => nearby.map((x) => ({
+    location: x.location,
+    id: x.id,
+  })), [nearby]);
+
   return (
     <div className="page">
       <Header fromRoot={false}/>
@@ -130,36 +160,18 @@ export function OfferScreen(offer: FullOffer|IntrinsicAttributes): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ul className="reviews__list">
-                  <li className="reviews__item">
-                    <div className="reviews__user user">
-                      <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                        <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
-                      </div>
-                      <span className="reviews__user-name">
-                            Max
-                      </span>
-                    </div>
-                    <div className="reviews__info">
-                      <div className="reviews__rating rating">
-                        <div className="reviews__stars rating__stars">
-                          <span style={{width: '80%'}}></span>
-                          <span className="visually-hidden">Rating</span>
-                        </div>
-                      </div>
-                      <p className="reviews__text">
-                        A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                      </p>
-                      <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                    </div>
-                  </li>
-                </ul>
+                <ReviewsMemo reviews={reviews}/>
                 <CommentForm/>
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <Map activeCity={activeCity} points={mapPoints} selectedPoint={offer
+            ? {
+              location: offer.location,
+              id: offer.id,
+            }
+            : undefined} className='offer__map map'
+          />
         </section>
         <div className="container">
           <section className="near-places places">

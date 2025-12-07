@@ -1,30 +1,53 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
-import {SiteDataState} from '../../types/state';
-import {fetchOffersAction, } from '../api-actions';
+import {OffersDataState} from '../../types/state';
+import {fetchOfferAction, fetchOfferNearby, getReviewsAction,} from '../api-actions';
+import {offersFull} from '../../mocks/offers-full.ts';
 
 
-const initialState: SiteDataState = {
-  offers: [],
+const initialState: OffersDataState = {
+  offer: offersFull[1],
+  nearbyOffers: [],
+  nearbyLoadingStatus: false,
+  comments: [],
+  commentsLoadingStatus: false,
   loadingStatus: false,
 };
 
 
-export const siteData = createSlice({
-  name: NameSpace.Site,
+export const offersData = createSlice({
+  name: NameSpace.Offers,
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchOffersAction.pending, (state) => {
+      .addCase(fetchOfferAction.pending, (state) => {
         state.loadingStatus = true;
       })
-      .addCase(fetchOffersAction.fulfilled, (state, action) => {
-        state.offers = action.payload;
+      .addCase(fetchOfferAction.fulfilled, (state, action) => {
+        state.offer = action.payload;
         state.loadingStatus = false;
       })
-      .addCase(fetchOffersAction.rejected, (state) => {
+      .addCase(fetchOfferAction.rejected, (state) => {
         state.loadingStatus = false;
+      })
+      .addCase(fetchOfferNearby.fulfilled, (state, action) => {
+        state.nearbyOffers = action.payload;
+        state.nearbyLoadingStatus = false;
+      })
+      .addCase(fetchOfferNearby.pending, (state) => {
+        state.nearbyLoadingStatus = true;
+      })
+      .addCase(getReviewsAction.fulfilled, (state, action) => {
+        state.comments = action.payload;
+        state.commentsLoadingStatus = false;
+      })
+      .addCase(getReviewsAction.rejected, (state) => {
+        state.comments = [];
+        state.commentsLoadingStatus = false;
+      })
+      .addCase(getReviewsAction.pending, (state) => {
+        state.commentsLoadingStatus = true;
       });
   }
 });

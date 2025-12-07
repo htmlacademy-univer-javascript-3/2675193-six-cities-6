@@ -12,18 +12,22 @@ import {useAppSelector} from '../hooks/store-hooks.ts';
 import {Spinner} from './spinner.tsx';
 import browserHistory from '../browser-history.ts';
 import HistoryRouter from '../history-router.tsx';
-import {getLoadingStatus,} from '../store/site-data/selectors.ts';
+import {getCommentsLoadingStatus, getLoadingStatus, getNearbyLoadingStatus,} from '../store/offers-data/selectors.ts';
 import {getAuthorizationStatus, getUserLoadingStatus} from '../store/user-data/selectors.ts';
+import {getCityOffersLoadingStatus} from '../store/cityOffersData/selectors.ts';
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
 
 export function App(): JSX.Element {
   const isLoading = useAppSelector(getLoadingStatus);
+  const isCityOffersLoading = useAppSelector(getCityOffersLoadingStatus);
+  const isCommentsLoading = useAppSelector(getCommentsLoadingStatus);
+  const isNearbyLoading = useAppSelector(getNearbyLoadingStatus);
   const isUserLoading = useAppSelector(getUserLoadingStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  if (isLoading || isUserLoading) {
+  if (isLoading || isUserLoading || isNearbyLoading || isCommentsLoading || isCityOffersLoading) {
     return (
       <Spinner />
     );

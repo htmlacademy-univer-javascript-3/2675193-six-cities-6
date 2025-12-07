@@ -6,3 +6,5 @@ export type UserData = {
   email: string;
   token: string;
 };
+
+export type UserDataPublic = Omit<UserData, 'token'|'email'|'id'>

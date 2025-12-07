@@ -1,8 +1,8 @@
 import {City} from '../../types/city.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
-import {getCity} from '../../store/site-data/selectors.ts';
-import {updateCity} from '../../store/site-data/site-data.ts';
 import React from 'react';
+import {getCity} from '../../store/city-data/selectors.ts';
+import {updateCity} from '../../store/city-data/city-data.ts';
 
 type CityListProps = {
   cities: City[];
