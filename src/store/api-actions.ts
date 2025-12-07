@@ -1,8 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
 import {Offer} from '../types/offer.ts';
-import {redirectToRoute, setLoadingStatus, updateAuthStatus, updateOffers} from './actions.ts';
-import {APIRoute, AppRoute, AuthorizationStatus} from '../const.ts';
+import {APIRoute} from '../const.ts';
 import {AppDispatch} from '../types/store-types.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {UserData} from '../types/user-data.ts';

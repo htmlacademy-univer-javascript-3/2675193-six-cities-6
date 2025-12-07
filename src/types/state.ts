@@ -5,9 +5,12 @@ import {store} from '../store';
 
 
 export type SiteDataState = {
-  city: City;
   offers: Offer[];
   loadingStatus: boolean;
+}
+
+export type CityDataState = {
+  city: City;
 }
 
 export type UserDataState = {

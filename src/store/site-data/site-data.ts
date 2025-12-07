@@ -1,14 +1,14 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
-import {GameData, SiteDataState, UserDataState} from '../../types/state';
-import {fetchOffersAction, fetchQuestionAction} from '../api-actions';
-import {cities} from '../../mocks/cities.ts';
+import {SiteDataState} from '../../types/state';
+import {fetchOffersAction, } from '../api-actions';
+
 
 const initialState: SiteDataState = {
-  city: cities[0],
   offers: [],
   loadingStatus: false,
 };
+
 
 export const siteData = createSlice({
   name: NameSpace.Site,
