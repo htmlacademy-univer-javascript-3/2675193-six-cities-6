@@ -4,12 +4,13 @@ import 'leaflet/dist/leaflet.css';
 import {Point} from '../../types/point.ts';
 import {useMap} from '../../hooks/use-map.tsx';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../const.ts';
-import {useAppSelector} from '../../hooks/store-hooks.ts';
-import {getCity} from '../../store/site-data/selectors.ts';
+import {City} from '../../types/city.ts';
 
 type MapProps = {
+  activeCity: City;
   points: Point[];
   selectedPoint: Point | undefined;
+  className: string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -24,9 +25,8 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-export function Map({ points, selectedPoint }: MapProps): JSX.Element {
+export function Map({ activeCity, points, selectedPoint, className }: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const activeCity = useAppSelector(getCity);
   const map = useMap(mapRef, activeCity);
 
   useEffect(() => {
@@ -56,5 +56,5 @@ export function Map({ points, selectedPoint }: MapProps): JSX.Element {
     }
   }, [map, points, selectedPoint]);
 
-  return <section className="cities__map map" ref={mapRef}></section>;
+  return <section className={className} ref={mapRef}></section>;
 }

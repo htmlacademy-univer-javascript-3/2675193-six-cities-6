@@ -1,11 +1,13 @@
 import {NameSpace} from '../const.ts';
 import {userData} from './user-data/user-data.ts';
-import {siteData} from './site-data/site-data.ts';
+import {offersData} from './offers-data/offers-data.ts';
 import {combineReducers} from '@reduxjs/toolkit';
 import {cityData} from './city-data/city-data.ts';
+import {cityOffersData} from './cityOffersData/city-offers-data.ts';
 
 export const rootReducer = combineReducers({
   [NameSpace.City]: cityData.reducer,
-  [NameSpace.Site]: siteData.reducer,
+  [NameSpace.CityOffers]: cityOffersData.reducer,
+  [NameSpace.Offers]: offersData.reducer,
   [NameSpace.User]: userData.reducer,
 });

@@ -36,6 +36,7 @@ export enum APIRoute {
 
 export enum NameSpace {
   City = 'CITY',
-  Site = 'SITE',
+  CityOffers = 'CITYOFFERS',
+  Offers = 'OFFERS',
   User = 'USER',
 }

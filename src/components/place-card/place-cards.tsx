@@ -25,7 +25,7 @@ export default function PlaceCards({placeCards, setActiveCardCb}: PlaceCardsProp
           style={{boxShadow: activeCardId === place.id ? 'black 0 0 20px' : 'none',
             zIndex: activeCardId === place.id ? 10000 : 0}}
         >
-          <PlaceCardMemo key={place.id} {...place}/>
+          <PlaceCardMemo key={place.id} placeCard={place} fromNear={false}/>
         </div>
       ))}
     </div>

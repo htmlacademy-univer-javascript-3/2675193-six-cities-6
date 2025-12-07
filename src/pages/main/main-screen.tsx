@@ -6,8 +6,9 @@ import {Map} from '../../components/map/map.tsx';
 import {cities} from '../../mocks/cities.ts';
 import {useAppSelector} from '../../hooks/store-hooks.ts';
 import HeaderMemo from '../../components/header.tsx';
-import {getCity, getOffersInActiveCity} from '../../store/site-data/selectors.ts';
 import CityListMemo from '../../components/city-list/city-list.tsx';
+import {getCity} from '../../store/city-data/selectors.ts';
+import {getOffersInActiveCity} from '../../store/cityOffersData/selectors.ts';
 
 export function MainScreen(): JSX.Element {
   const activeCity = useAppSelector(getCity);
@@ -48,6 +49,7 @@ export function MainScreen(): JSX.Element {
             </section>
             <div className="cities__right-section">
               <Map
+                activeCity={activeCity}
                 points={mapPoints}
                 selectedPoint={
                   activeOffer
@@ -57,6 +59,7 @@ export function MainScreen(): JSX.Element {
                     }
                     : undefined
                 }
+                className='cities__map map'
               />
             </div>
           </div>
