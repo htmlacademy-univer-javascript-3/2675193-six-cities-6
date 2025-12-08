@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import {Routes} from '../../const.ts';
 import {Offer} from '../../types/offer.ts';
 
-export default function FavoriteCard({id, isPremium, smallImageSrc, price, rating, title, type}: Offer){
+export default function FavoriteCard({id, isPremium, price, rating, title, type, previewImage}: Offer){
   const starsWidth = `${rating * 20}%`;
   return (
     <article className="favorites__card place-card">
@@ -12,7 +12,7 @@ export default function FavoriteCard({id, isPremium, smallImageSrc, price, ratin
         </div> }
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={smallImageSrc} width="150" height="110" alt="Place image"/>
+          <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image"/>
         </a>
       </div>
       <div className="favorites__card-info place-card__info">

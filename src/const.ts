@@ -39,4 +39,5 @@ export enum NameSpace {
   CityOffers = 'CITYOFFERS',
   Offers = 'OFFERS',
   User = 'USER',
+  Favourites = 'FAVOURITES',
 }

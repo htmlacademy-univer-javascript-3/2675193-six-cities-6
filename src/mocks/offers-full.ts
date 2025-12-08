@@ -1,4 +1,4 @@
-import {FullOffer} from '../types/fullOffer.ts';
+import {FullOffer} from '../types/full-offer.ts';
 
 export const offersFull : FullOffer[] = [{
   id: '1',

@@ -3,6 +3,7 @@ import {AppRoute, AuthorizationStatus} from '../const.ts';
 import {Link} from 'react-router-dom';
 import {getAuthorizationStatus, getEmail} from '../store/user-data/selectors.ts';
 import React from 'react';
+import {getFavoriteOffersCount} from '../store/favorites-data/selectors.ts';
 
 type HeaderProps = {
   fromRoot: boolean;
@@ -11,6 +12,8 @@ type HeaderProps = {
 function Header({fromRoot}: HeaderProps) {
   const authStatus = useAppSelector(getAuthorizationStatus);
   const userEmail = useAppSelector(getEmail);
+  const favouritesCount = useAppSelector(getFavoriteOffersCount);
+
   return (
     <header className="header">
       <div className="container">
@@ -30,11 +33,11 @@ function Header({fromRoot}: HeaderProps) {
               {authStatus === AuthorizationStatus.Auth ?
                 <>
                   <li className="header__nav-item user">
-                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Root}>
+                    <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
                       <span className="header__user-name user__name">{userEmail}</span>
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__favorite-count">{favouritesCount}</span>
                     </Link>
                   </li>
                   <li className="header__nav-item">
