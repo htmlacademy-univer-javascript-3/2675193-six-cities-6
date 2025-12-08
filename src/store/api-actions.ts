@@ -8,7 +8,9 @@ import {UserData} from '../types/user-data.ts';
 import {AuthData} from '../types/auth-data.ts';
 import {State} from '../types/state.ts';
 import {Review, ReviewPost} from '../types/review.ts';
-import {FullOffer} from '../types/fullOffer.ts';
+import {FullOffer} from '../types/full-offer.ts';
+import {FavoriteStatus} from '../types/favorite-status.ts';
+import {convertFullOfferToOffer} from '../utils/utils.ts';
 
 
 export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
@@ -106,4 +108,28 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
   },
+);
+
+export const getFavoritesAction = createAsyncThunk<Offer[], undefined, {
+  extra: AxiosInstance;
+}>(
+  'favourites/getFavourites',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Offer[]>(APIRoute.Favourites);
+
+    return data;
+  }
+);
+
+export const updateFavoriteStatusAction = createAsyncThunk<Offer, FavoriteStatus, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'favourites/updateStatus',
+  async ({offerId, status}, {extra: api}) => {
+    const {data} = await api.post<FullOffer>(`${APIRoute.Favourites}/${offerId}/${status}`);
+
+    return convertFullOfferToOffer(data);
+  }
 );

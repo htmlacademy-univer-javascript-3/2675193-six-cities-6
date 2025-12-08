@@ -6,9 +6,10 @@ import {Nullable} from 'vitest';
 type PlaceCardsProps = {
   placeCards: Offer[];
   setActiveCardCb: (offer: Nullable<Offer>) => void;
+  onFavoriteClick?: (offerId: string, isFavorite: boolean) => void;
 }
 
-export default function PlaceCards({placeCards, setActiveCardCb}: PlaceCardsProps) {
+export default function PlaceCards({placeCards, setActiveCardCb, onFavoriteClick}: PlaceCardsProps) {
   const [activeCardId, setActiveCardId] = useState<string>('');
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -25,7 +26,7 @@ export default function PlaceCards({placeCards, setActiveCardCb}: PlaceCardsProp
           style={{boxShadow: activeCardId === place.id ? 'black 0 0 20px' : 'none',
             zIndex: activeCardId === place.id ? 10000 : 0}}
         >
-          <PlaceCardMemo key={place.id} placeCard={place} fromNear={false}/>
+          <PlaceCardMemo key={place.id} placeCard={place} fromNear={false} onFavoriteClick={onFavoriteClick}/>
         </div>
       ))}
     </div>

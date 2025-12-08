@@ -1,8 +1,13 @@
 import Header from '../../components/header.tsx';
-import {fetchOfferAction, fetchOfferNearby, getReviewsAction} from '../../store/api-actions.ts';
+import {
+  fetchOfferAction,
+  fetchOfferNearby,
+  getReviewsAction,
+  updateFavoriteStatusAction
+} from '../../store/api-actions.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
 import {getNearby, getOffer} from '../../store/offers-data/selectors.ts';
-import {useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import OfferComponentMemo from '../../components/offer/offer-component.tsx';
 import NearPlacesMemo from '../../components/near-place/near-places.tsx';
@@ -24,14 +29,17 @@ export function OfferScreen(): JSX.Element {
       dispatch(fetchOfferNearby(id));
     }
   }, [id, dispatch]);
-
+  const onFavoriteClick = useCallback((offerId: string, isFavorite: boolean) => {
+    const status = isFavorite ? 0 : 1;
+    dispatch(updateFavoriteStatusAction({offerId, status}));
+  }, [dispatch]);
   return (
     <div className="page">
       <Header fromRoot={false}/>
 
       <main className="page__main page__main--offer">
-        <OfferComponentMemo offer={offer} />
-        <NearPlacesMemo places={nearby}/>
+        <OfferComponentMemo offer={offer} onFavoriteClick={onFavoriteClick}/>
+        <NearPlacesMemo places={nearby} onFavoriteClick={onFavoriteClick}/>
       </main>
     </div>
   );

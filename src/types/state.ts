@@ -3,7 +3,7 @@ import {Offer} from './offer.ts';
 import { AuthorizationStatus} from '../const.ts';
 import {store} from '../store';
 import {Review} from './review.ts';
-import {FullOffer} from './fullOffer.ts';
+import {FullOffer} from './full-offer.ts';
 
 
 export type OffersDataState = {
@@ -23,6 +23,12 @@ export type CityOffersDataState = {
 
 export type CityDataState = {
   city: City;
+}
+
+export type FavouritesDataState = {
+  favourites: Offer[];
+  loadingStatus: boolean;
+  postLoadingStatus: boolean;
 }
 
 export type UserDataState = {

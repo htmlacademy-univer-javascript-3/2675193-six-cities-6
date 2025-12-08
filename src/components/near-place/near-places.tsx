@@ -4,16 +4,17 @@ import PlaceCardMemo from '../place-card/place-card.tsx';
 
 type NearPlacesProps = {
   places: Offer[];
+  onFavoriteClick?: (offerId: string, isFavorite: boolean) => void;
 }
 
-function NearPlaces({places}: NearPlacesProps) {
+function NearPlaces({places, onFavoriteClick}: NearPlacesProps) {
   return (
     <div className="container">
       <section className="near-places places">
         <h2 className="near-places__title">Other places in the neighbourhood</h2>
         <div className="near-places__list places__list">
           {places.map((place) =>
-            <PlaceCardMemo key={place.id} placeCard={place} fromNear />
+            <PlaceCardMemo key={place.id} placeCard={place} fromNear onFavoriteClick={onFavoriteClick} />
           )}
         </div>
       </section>

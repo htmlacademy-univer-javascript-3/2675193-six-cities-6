@@ -3,12 +3,9 @@ import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
 import React from 'react';
 import {getCity} from '../../store/city-data/selectors.ts';
 import {updateCity} from '../../store/city-data/city-data.ts';
+import {cities} from '../../mocks/cities.ts';
 
-type CityListProps = {
-  cities: City[];
-}
-
-function CityList({cities}: CityListProps) {
+function CityList() {
   const currentCity = useAppSelector(getCity);
   const dispatch = useAppDispatch();
 

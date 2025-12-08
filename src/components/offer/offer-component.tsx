@@ -4,16 +4,20 @@ import {Map} from '../map/map.tsx';
 import {useAppSelector} from '../../hooks/store-hooks.ts';
 import {getComments, getNearby} from '../../store/offers-data/selectors.ts';
 import {getCity} from '../../store/city-data/selectors.ts';
-import {memo, useMemo} from 'react';
-import {FullOffer} from '../../types/fullOffer.ts';
+import {memo, useMemo, useState} from 'react';
+import {FullOffer} from '../../types/full-offer.ts';
 
 type OfferComponentProps = {
   offer: FullOffer;
+  onFavoriteClick?: (offerId: string, isFavorite: boolean) => void;
 }
 
-function OfferComponent({offer}: OfferComponentProps) {
-  const {price, images, isPremium, title, host, rating, description, maxAdults, bedrooms, type, goods} = offer;
+function OfferComponent({offer, onFavoriteClick}: OfferComponentProps) {
+  const {id, price, images, isPremium, title, host, rating, description, maxAdults, bedrooms, type, goods, isFavorite} = offer;
   const starsWidth = `${rating * 20}%`;
+  const [localIsFavorite, updateIsFavourite] = useState(isFavorite);
+  const bookmarkButtonClassName = `${localIsFavorite ? 'offer__bookmark-button--active' : 'offer__bookmark-button'} button`;
+  const bookmarkStatus = `${localIsFavorite ? 'In bookmarks' : 'To bookmarks'}`;
 
   const reviews = useAppSelector(getComments);
   const activeCity = useAppSelector(getCity);
@@ -49,11 +53,16 @@ function OfferComponent({offer}: OfferComponentProps) {
               {title}
               Beautiful &amp; luxurious studio at great location
             </h1>
-            <button className="offer__bookmark-button button" type="button">
+            <button className={`${bookmarkButtonClassName}`} type="button"
+              onClick={() => {
+                updateIsFavourite(!localIsFavorite);
+                onFavoriteClick?.(id, localIsFavorite);
+              }}
+            >
               <svg className="offer__bookmark-icon" width="31" height="33">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
-              <span className="visually-hidden">To bookmarks</span>
+              <span className="visually-hidden">{bookmarkStatus}</span>
             </button>
           </div>
           <div className="offer__rating rating">

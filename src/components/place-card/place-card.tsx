@@ -1,17 +1,19 @@
 import {Link} from 'react-router-dom';
 import {Routes} from '../../const.ts';
 import {Offer} from '../../types/offer.ts';
-import React from 'react';
+import React, {useState} from 'react';
 
 type PlaceCardProps = {
   placeCard: Offer;
   fromNear: boolean;
+  onFavoriteClick?: (offerId: string, isFavorite: boolean) => void;
 }
 
-function PlaceCard({placeCard, fromNear}: PlaceCardProps): JSX.Element {
+function PlaceCard({placeCard, fromNear, onFavoriteClick}: PlaceCardProps): JSX.Element {
   const {id, isPremium, previewImage, price, isFavorite, rating, title, type} = placeCard;
-  const bookmarkButtonClassName = `${isFavorite ? 'place-card__bookmark-button--active' : ''} button`;
-  const bookmarkStatus = `${isFavorite ? 'In bookmarks' : ''} To bookmarks`;
+  const [localIsFavorite, updateLocalIsFavorite] = useState(isFavorite);
+  const bookmarkButtonClassName = `${localIsFavorite ? 'place-card__bookmark-button--active' : ''} button`;
+  const bookmarkStatus = `${localIsFavorite ? 'In bookmarks' : ''} To bookmarks`;
   const starsWidth = `${rating * 20}%`;
   const className = `${fromNear ? 'near-places__card' : 'cities__card'} place-card`;
 
@@ -32,7 +34,12 @@ function PlaceCard({placeCard, fromNear}: PlaceCardProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${bookmarkButtonClassName}`} type="button">
+          <button className={`place-card__bookmark-button ${bookmarkButtonClassName}`} type="button"
+            onClick={() => {
+              onFavoriteClick?.(placeCard.id, localIsFavorite);
+              updateLocalIsFavorite(!localIsFavorite);
+            }}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
