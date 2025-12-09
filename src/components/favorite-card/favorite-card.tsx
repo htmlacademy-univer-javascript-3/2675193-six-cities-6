@@ -1,9 +1,18 @@
 import {Link} from 'react-router-dom';
 import {Routes} from '../../const.ts';
 import {Offer} from '../../types/offer.ts';
+import React from 'react';
 
-export default function FavoriteCard({id, isPremium, price, rating, title, type, previewImage}: Offer){
+type Props = {
+  offer: Offer;
+  onFavoriteClick?: (offerId: string, isFavorite: boolean) => void;
+}
+
+function FavoriteCard({offer, onFavoriteClick}: Props) {
+  const {id, isPremium, price, rating, title, type, previewImage, isFavorite} = offer;
   const starsWidth = `${rating * 20}%`;
+  const bookmarkButtonClassName = `${isFavorite ? 'place-card__bookmark-button--active' : ''} button`;
+  //const bookmarkStatus = `${isFavorite ? 'In bookmarks' : ''} To bookmarks`;
   return (
     <article className="favorites__card place-card">
       {isPremium &&
@@ -21,7 +30,11 @@ export default function FavoriteCard({id, isPremium, price, rating, title, type,
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button className={`place-card__bookmark-button ${bookmarkButtonClassName}`} type="button"
+            onClick={() => {
+              onFavoriteClick?.(id, isFavorite);
+            }}
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -42,3 +55,6 @@ export default function FavoriteCard({id, isPremium, price, rating, title, type,
     </article>
   );
 }
+
+const FavoriteCardMemo = React.memo(FavoriteCard);
+export default FavoriteCardMemo;

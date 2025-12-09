@@ -1,10 +1,12 @@
-import FavoriteCard from '../../components/favorite-card/favorite-card.tsx';
+import FavoriteCardMemo from '../../components/favorite-card/favorite-card.tsx';
 import {Offer} from '../../types/offer.ts';
 import Header from '../../components/header.tsx';
 import {AppRoute} from '../../const.ts';
 import {Link} from 'react-router-dom';
-import {useAppSelector} from '../../hooks/store-hooks.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
 import {getFavoriteOffers} from '../../store/favorites-data/selectors.ts';
+import {useCallback} from 'react';
+import {updateFavoriteStatusAction} from '../../store/api-actions.ts';
 
 export function FavoritesScreen(): JSX.Element {
   const placeCards = useAppSelector(getFavoriteOffers);
@@ -17,6 +19,11 @@ export function FavoritesScreen(): JSX.Element {
     },
     {} as { [city: string]: Offer[] }
   );
+  const dispatch = useAppDispatch();
+  const onFavoriteClick = useCallback((offerId: string, isFavorite: boolean) => {
+    const status = isFavorite ? 0 : 1;
+    dispatch(updateFavoriteStatusAction({offerId, status}));
+  }, [dispatch]);
   return (
     <div className="page">
       <Header fromRoot={false}/>
@@ -36,7 +43,8 @@ export function FavoritesScreen(): JSX.Element {
                       </div>
                     </div>
                     <div className="favorites__places">
-                      {cards.map((placeCard: Offer) => (<FavoriteCard key={placeCard.id} {...placeCard}/>))}
+                      {cards.map((placeCard: Offer) => (
+                        <FavoriteCardMemo key={placeCard.id} offer={placeCard} onFavoriteClick={onFavoriteClick}/>))}
                     </div>
                   </li>))}
             </ul>
