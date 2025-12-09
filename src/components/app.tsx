@@ -14,7 +14,7 @@ import browserHistory from '../browser-history.ts';
 import HistoryRouter from '../history-router.tsx';
 import {getCommentsLoadingStatus, getLoadingStatus, getNearbyLoadingStatus,} from '../store/offers-data/selectors.ts';
 import {getAuthorizationStatus, getUserLoadingStatus} from '../store/user-data/selectors.ts';
-import {getCityOffersLoadingStatus} from '../store/cityOffersData/selectors.ts';
+import {getCityOffersLoadingStatus} from '../store/cit-offers-data/selectors.ts';
 import {getFavouritesLoadingStatus} from '../store/favorites-data/selectors.ts';
 
 store.dispatch(fetchOffersAction());
