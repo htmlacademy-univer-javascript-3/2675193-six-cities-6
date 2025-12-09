@@ -7,6 +7,8 @@ export const getNearbyLoadingStatus = (state : State) : boolean => state[NameSpa
 
 export const getOffer = (state : State) => state[NameSpace.Offers].offer;
 
+export const getOfferFound = (state : State) => !state[NameSpace.Offers].notFound;
+
 export const getComments = (state : State) => state[NameSpace.Offers].comments;
 
 export const getNearby = (state: State) => state[NameSpace.Offers].nearbyOffers;

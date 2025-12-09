@@ -1,4 +1,6 @@
-import {Fragment, useCallback, useState} from 'react';
+import React, {Fragment, useCallback, useState} from 'react';
+import {getReviewsAction, sendReviewAction} from '../../store/api-actions.ts';
+import {useAppDispatch} from '../../hooks/store-hooks.ts';
 
 type StarInputProps = {
   rating: RatingValue;
@@ -32,8 +34,13 @@ function StarInput({rating, handleChange} :StarInputProps) {
   );
 }
 
-export default function CommentForm() {
+type CommentFormProps = {
+  offerId: string;
+}
+
+export default function CommentForm({offerId}: CommentFormProps) {
   const [formData, setFormData] = useState({rating: -1, review: ''});
+  const dispatch = useAppDispatch();
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = event.target;
     setFormData({...formData, [name]: value});
@@ -50,9 +57,11 @@ export default function CommentForm() {
     evt.preventDefault();
 
     if (formData.review && formData.rating > 0) {
-      setFormData({...formData, review: ''});
+      dispatch(sendReviewAction({rating: formData.rating, comment: formData.review, id: offerId}));
+      //dispatch(getReviewsAction(offerId));
+      setFormData({rating: 0, review: ''});
     }
-  }, [formData]);
+  }, [offerId, formData]);
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>

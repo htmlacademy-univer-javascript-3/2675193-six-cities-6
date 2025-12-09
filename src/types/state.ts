@@ -13,6 +13,7 @@ export type OffersDataState = {
   comments: Review[];
   commentsLoadingStatus: boolean;
   loadingStatus: boolean;
+  notFound: boolean;
 }
 
 export type CityOffersDataState = {

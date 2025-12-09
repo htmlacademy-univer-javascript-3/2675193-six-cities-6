@@ -6,29 +6,36 @@ import {
   updateFavoriteStatusAction
 } from '../../store/api-actions.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
-import {getNearby, getOffer} from '../../store/offers-data/selectors.ts';
+import {getNearby, getOffer, getOfferFound} from '../../store/offers-data/selectors.ts';
 import {useCallback, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import OfferComponentMemo from '../../components/offer/offer-component.tsx';
 import NearPlacesMemo from '../../components/near-place/near-places.tsx';
+import {AppRoute} from '../../const.ts';
 
 export function OfferScreen(): JSX.Element {
   const {id} = useParams<{ id: string }>();
 
+  const nav = useNavigate();
+
   const offer = useAppSelector(getOffer);
-  const nearby = useAppSelector(getNearby);
+  const isFound = useAppSelector(getOfferFound);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (!id) {
       return;
     }
-    if (offer.id !== id){
+    if (isFound && offer.id !== id){
       dispatch(fetchOfferAction(id));
       dispatch(getReviewsAction(id));
       dispatch(fetchOfferNearby(id));
     }
   }, [id, dispatch]);
+  if (!isFound) {
+    nav(AppRoute.Other);
+  }
+  const nearby = useAppSelector(getNearby);
   const onFavoriteClick = useCallback((offerId: string, isFavorite: boolean) => {
     const status = isFavorite ? 0 : 1;
     dispatch(updateFavoriteStatusAction({offerId, status}));

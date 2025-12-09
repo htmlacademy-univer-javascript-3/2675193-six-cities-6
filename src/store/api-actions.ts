@@ -68,7 +68,7 @@ export const sendReviewAction = createAsyncThunk<Review, ReviewPost, {
 }>(
   'data/sendReview',
   async ({id, comment, rating}, {extra: api}) => {
-    const {data} = await api.post<Review>(APIRoute.Comments.replace('{offerId}', id), {comment, rating});
+    const {data} = await api.post<Review>(APIRoute.Comments.replace('{offerId}', id), {comment, rating: Number(rating)});
     return data;
   }
 );
