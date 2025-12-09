@@ -3,7 +3,7 @@ import {userData} from './user-data/user-data.ts';
 import {offersData} from './offers-data/offers-data.ts';
 import {combineReducers} from '@reduxjs/toolkit';
 import {cityData} from './city-data/city-data.ts';
-import {cityOffersData} from './cityOffersData/city-offers-data.ts';
+import {cityOffersData} from './cit-offers-data/city-offers-data.ts';
 import {favouritesData} from './favorites-data/favorites-data.ts';
 
 export const rootReducer = combineReducers({
