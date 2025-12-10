@@ -10,6 +10,9 @@ import {getOffersInActiveCity} from '../../store/cit-offers-data/selectors.ts';
 import MainEmptyScreenMemo from './main-empty-screen.tsx';
 import {updateFavoriteStatusAction} from '../../store/api-actions.ts';
 import SortedPlaceCardsMemo from '../../components/sorted-place-cards/sorted-place-cards.tsx';
+import {AppRoute, AuthorizationStatus} from '../../const.ts';
+import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
+import {useNavigate} from 'react-router-dom';
 
 export function MainScreen(): JSX.Element {
   const activeCity = useAppSelector(getCity);
@@ -21,10 +24,16 @@ export function MainScreen(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState<Nullable<Offer>>(null);
   const setActiveOfferCb = useCallback((offer: Nullable<Offer>) => setActiveOffer(offer), []);
   const dispatch = useAppDispatch();
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  const navigate = useNavigate();
   const onFavoriteClick = useCallback((offerId: string, isFavorite: boolean) => {
-    const status = isFavorite ? 0 : 1;
-    dispatch(updateFavoriteStatusAction({offerId, status}));
-  }, [dispatch]);
+    if (authStatus === AuthorizationStatus.Auth) {
+      const status = isFavorite ? 0 : 1;
+      dispatch(updateFavoriteStatusAction({offerId, status}));
+    } else {
+      navigate(AppRoute.Login);
+    }
+  }, []);
 
   return (
     <div className="page page--gray page--main">

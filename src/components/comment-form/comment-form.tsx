@@ -1,4 +1,8 @@
-import {Fragment, useCallback, useState} from 'react';
+import React, {Fragment, useCallback, useState} from 'react';
+import {sendReviewAction} from '../../store/api-actions.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
+import {ReviewPost} from '../../types/review.ts';
+import {getSendingReviewsStatus} from '../../store/offers-data/selectors.ts';
 
 type StarInputProps = {
   rating: RatingValue;
@@ -32,27 +36,35 @@ function StarInput({rating, handleChange} :StarInputProps) {
   );
 }
 
-export default function CommentForm() {
+type CommentFormProps = {
+  offerId: string;
+}
+
+export default function CommentForm({offerId}: CommentFormProps) {
   const [formData, setFormData] = useState({rating: -1, review: ''});
+  const dispatch = useAppDispatch();
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = event.target;
     setFormData({...formData, [name]: value});
   }, [formData]);
+
+  const isReviewSending = useAppSelector(getSendingReviewsStatus);
 
   const isSubmitDisabled = !(
     formData.rating > 0 &&
     formData.review &&
     formData.review.length >= MIN_MESSAGE_LENGTH &&
     formData.review.length <= MAX_MESSAGE_LENGTH
-  );
+  ) || isReviewSending;
 
   const handleSubmit = useCallback((evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (formData.review && formData.rating > 0) {
-      setFormData({...formData, review: ''});
+      dispatch(sendReviewAction({rating: formData.rating, comment: formData.review, id: offerId} as ReviewPost));
+      setFormData({rating: -1, review: ''});
     }
-  }, [formData]);
+  }, [offerId, formData]);
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>

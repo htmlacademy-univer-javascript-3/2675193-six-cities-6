@@ -3,9 +3,10 @@ import CommentForm from '../comment-form/comment-form.tsx';
 import {Map} from '../map/map.tsx';
 import {useAppSelector} from '../../hooks/store-hooks.ts';
 import {getComments, getNearby} from '../../store/offers-data/selectors.ts';
-import {getCity} from '../../store/city-data/selectors.ts';
 import {memo, useMemo, useState} from 'react';
 import {FullOffer} from '../../types/full-offer.ts';
+import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
+import {AuthorizationStatus} from '../../const.ts';
 
 type OfferComponentProps = {
   offer: FullOffer;
@@ -19,14 +20,14 @@ function OfferComponent({offer, onFavoriteClick}: OfferComponentProps) {
   const bookmarkButtonClassName = `${localIsFavorite ? 'offer__bookmark-button--active' : 'offer__bookmark-button'} button`;
   const bookmarkStatus = `${localIsFavorite ? 'In bookmarks' : 'To bookmarks'}`;
 
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const reviews = useAppSelector(getComments);
-  const activeCity = useAppSelector(getCity);
   const nearby = useAppSelector(getNearby);
   const currentPoint = useMemo(() => ({
     location: offer.location,
     id: offer.id
   }), [offer]);
-  const mapPoints = useMemo(() => nearby.map((x) => ({
+  const mapPoints = useMemo(() => nearby.slice(0, 3).map((x) => ({
     location: x.location,
     id: x.id,
   })).concat(currentPoint), [nearby, currentPoint]);
@@ -120,11 +121,11 @@ function OfferComponent({offer, onFavoriteClick}: OfferComponentProps) {
           </div>
           <section className="offer__reviews reviews">
             <ReviewsMemo reviews={reviews}/>
-            <CommentForm/>
+            {authorizationStatus === AuthorizationStatus.Auth ? <CommentForm offerId={id}/> : null}
           </section>
         </div>
       </div>
-      <Map activeCity={activeCity} points={mapPoints} selectedPoint={currentPoint} className='offer__map map'/>
+      <Map activeCity={offer.city} points={mapPoints} selectedPoint={currentPoint} className='offer__map map'/>
     </section>
   );
 }
