@@ -12,6 +12,7 @@ const initialState: OffersDataState = {
   comments: [],
   commentsLoadingStatus: false,
   loadingStatus: false,
+  sendingReviewsStatus: false,
   notFound: false,
 };
 
@@ -58,7 +59,12 @@ export const offersData = createSlice({
         state.commentsLoadingStatus = true;
       })
       .addCase(sendReviewAction.fulfilled, (state, action) => {
-          state.comments = state.comments.concat(action.payload);
+        state.comments = state.comments.concat(action.payload);
+        state.sendingReviewsStatus = false;
+      }).addCase(sendReviewAction.pending, (state) => {
+        state.sendingReviewsStatus = true;
+      }).addCase(sendReviewAction.rejected, (state) => {
+        state.sendingReviewsStatus = false;
       });
   }
 });

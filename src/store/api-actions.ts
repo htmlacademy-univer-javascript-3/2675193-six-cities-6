@@ -7,7 +7,7 @@ import {dropToken, saveToken} from '../services/token.ts';
 import {UserData} from '../types/user-data.ts';
 import {AuthData} from '../types/auth-data.ts';
 import {State} from '../types/state.ts';
-import {Review, ReviewPost} from '../types/review.ts';
+import {Review, ReviewPost, setDate} from '../types/review.ts';
 import {FullOffer} from '../types/full-offer.ts';
 import {FavoriteStatus} from '../types/favorite-status.ts';
 import {convertFullOfferToOffer} from '../utils/utils.ts';
@@ -57,6 +57,7 @@ export const getReviewsAction = createAsyncThunk<Review[], string, {
   'data/getReviews',
   async (id, {extra: api}) => {
     const {data} = await api.get<Review[]>(APIRoute.Comments.replace('{offerId}', id));
+    data.forEach((review) => setDate(review));
     return data;
   },
 );
@@ -69,6 +70,7 @@ export const sendReviewAction = createAsyncThunk<Review, ReviewPost, {
   'data/sendReview',
   async ({id, comment, rating}, {extra: api}) => {
     const {data} = await api.post<Review>(APIRoute.Comments.replace('{offerId}', id), {comment, rating: Number(rating)});
+    setDate(data);
     return data;
   }
 );

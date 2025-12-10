@@ -14,6 +14,7 @@ export type OffersDataState = {
   commentsLoadingStatus: boolean;
   loadingStatus: boolean;
   notFound: boolean;
+  sendingReviewsStatus: boolean;
 }
 
 export type CityOffersDataState = {

@@ -7,6 +7,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
 import {getFavoriteOffers} from '../../store/favorites-data/selectors.ts';
 import {useCallback} from 'react';
 import {updateFavoriteStatusAction} from '../../store/api-actions.ts';
+import FavoriteEmptyScreenMemo from './favorites-empty-screen.tsx';
 
 export function FavoritesScreen(): JSX.Element {
   const placeCards = useAppSelector(getFavoriteOffers);
@@ -29,26 +30,30 @@ export function FavoritesScreen(): JSX.Element {
       <Header fromRoot={false}/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {Object.entries(citiesFavoriteOffers).map(([cityName, cards]) =>
-                (
-                  <li key={cityName} className="favorites__locations-items">
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href="#">
-                          <span>{cityName}</span>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="favorites__places">
-                      {cards.map((placeCard: Offer) => (
-                        <FavoriteCardMemo key={placeCard.id} offer={placeCard} onFavoriteClick={onFavoriteClick}/>))}
-                    </div>
-                  </li>))}
-            </ul>
-          </section>
+          {placeCards.length > 0 ?
+            (
+              <section className="favorites">
+                <h1 className="favorites__title">Saved listing</h1>
+                <ul className="favorites__list">
+                  {Object.entries(citiesFavoriteOffers).map(([cityName, cards]) =>
+                    (
+                      <li key={cityName} className="favorites__locations-items">
+                        <div className="favorites__locations locations locations--current">
+                          <div className="locations__item">
+                            <a className="locations__item-link" href="#">
+                              <span>{cityName}</span>
+                            </a>
+                          </div>
+                        </div>
+                        <div className="favorites__places">
+                          {cards.map((placeCard: Offer) => (
+                            <FavoriteCardMemo key={placeCard.id} offer={placeCard} onFavoriteClick={onFavoriteClick}/>))}
+                        </div>
+                      </li>))}
+                </ul>
+              </section>
+            ) :
+            <FavoriteEmptyScreenMemo/> }
         </div>
       </main>
       <footer className="footer container">

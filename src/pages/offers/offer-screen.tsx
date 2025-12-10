@@ -11,7 +11,8 @@ import {useCallback, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import OfferComponentMemo from '../../components/offer/offer-component.tsx';
 import NearPlacesMemo from '../../components/near-place/near-places.tsx';
-import {AppRoute} from '../../const.ts';
+import {AppRoute, AuthorizationStatus} from '../../const.ts';
+import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
 
 export function OfferScreen(): JSX.Element {
   const {id} = useParams<{ id: string }>();
@@ -33,12 +34,17 @@ export function OfferScreen(): JSX.Element {
     }
   }, [id, dispatch]);
   if (!isFound) {
-    nav(AppRoute.Other);
+    nav(AppRoute.NotFound);
   }
   const nearby = useAppSelector(getNearby);
+  const authStatus = useAppSelector(getAuthorizationStatus);
   const onFavoriteClick = useCallback((offerId: string, isFavorite: boolean) => {
-    const status = isFavorite ? 0 : 1;
-    dispatch(updateFavoriteStatusAction({offerId, status}));
+    if (authStatus === AuthorizationStatus.Auth) {
+      const status = isFavorite ? 0 : 1;
+      dispatch(updateFavoriteStatusAction({offerId, status}));
+    } else {
+      nav(AppRoute.Login);
+    }
   }, [dispatch]);
   return (
     <div className="page">

@@ -1,6 +1,8 @@
 import React, {Fragment, useCallback, useState} from 'react';
-import {getReviewsAction, sendReviewAction} from '../../store/api-actions.ts';
-import {useAppDispatch} from '../../hooks/store-hooks.ts';
+import {sendReviewAction} from '../../store/api-actions.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
+import {ReviewPost} from '../../types/review.ts';
+import {getSendingReviewsStatus} from '../../store/offers-data/selectors.ts';
 
 type StarInputProps = {
   rating: RatingValue;
@@ -46,20 +48,21 @@ export default function CommentForm({offerId}: CommentFormProps) {
     setFormData({...formData, [name]: value});
   }, [formData]);
 
+  const isReviewSending = useAppSelector(getSendingReviewsStatus);
+
   const isSubmitDisabled = !(
     formData.rating > 0 &&
     formData.review &&
     formData.review.length >= MIN_MESSAGE_LENGTH &&
     formData.review.length <= MAX_MESSAGE_LENGTH
-  );
+  ) || isReviewSending;
 
   const handleSubmit = useCallback((evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (formData.review && formData.rating > 0) {
-      dispatch(sendReviewAction({rating: formData.rating, comment: formData.review, id: offerId}));
-      //dispatch(getReviewsAction(offerId));
-      setFormData({rating: 0, review: ''});
+      dispatch(sendReviewAction({rating: formData.rating, comment: formData.review, id: offerId} as ReviewPost));
+      setFormData({rating: -1, review: ''});
     }
   }, [offerId, formData]);
 
