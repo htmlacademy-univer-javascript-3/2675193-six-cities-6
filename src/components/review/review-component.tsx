@@ -1,7 +1,7 @@
 import {Review} from '../../types/review.ts';
 import {memo} from 'react';
 
-function ReviewComponent({user, rating, comment, date}: Review){
+function ReviewComponent({user, rating, comment, date, dateString}: Review){
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -22,7 +22,7 @@ function ReviewComponent({user, rating, comment, date}: Review){
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime={date}>April 2019</time>
+        <time className="reviews__time" dateTime={date.toString()}>{dateString}</time>
       </div>
     </li>);
 }
