@@ -64,7 +64,7 @@ export default function CommentForm({offerId}: CommentFormProps) {
       dispatch(sendReviewAction({rating: formData.rating, comment: formData.review, id: offerId} as ReviewPost));
       setFormData({rating: -1, review: ''});
     }
-  }, [offerId, formData]);
+  }, [offerId, formData, dispatch]);
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
@@ -79,7 +79,7 @@ export default function CommentForm({offerId}: CommentFormProps) {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_MESSAGE_LENGTH} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={isSubmitDisabled}>Submit</button>
       </div>

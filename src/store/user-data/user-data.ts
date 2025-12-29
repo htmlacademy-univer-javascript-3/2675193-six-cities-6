@@ -31,7 +31,6 @@ export const userData = createSlice({
       .addCase(loginAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.email = action.payload.email;
-        state.loadingStatus = true; // redirect to route
         state.loadingStatus = false;
       })
       .addCase(loginAction.rejected, (state) => {
@@ -43,10 +42,14 @@ export const userData = createSlice({
 
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.email = '';
         state.loadingStatus = false;
       })
       .addCase(logoutAction.pending, (state)=> {
         state.loadingStatus = true;
+      })
+      .addCase(logoutAction.rejected, (state)=> {
+        state.loadingStatus = false;
       });
   }
 });

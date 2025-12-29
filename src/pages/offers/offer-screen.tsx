@@ -1,4 +1,4 @@
-import Header from '../../components/header.tsx';
+import Header from '../../components/header/header.tsx';
 import {
   fetchOfferAction,
   fetchOfferNearby,
@@ -9,7 +9,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
 import {getNearby, getOffer, getOfferFound} from '../../store/offers-data/selectors.ts';
 import {useCallback, useEffect} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import OfferComponentMemo from '../../components/offer/offer-component.tsx';
+import OfferComponentMemo from '../../components/offer-component/offer-component.tsx';
 import NearPlacesMemo from '../../components/near-place/near-places.tsx';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
@@ -32,7 +32,7 @@ export function OfferScreen(): JSX.Element {
       dispatch(getReviewsAction(id));
       dispatch(fetchOfferNearby(id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, isFound, offer.id]);
   if (!isFound) {
     nav(AppRoute.NotFound);
   }
@@ -45,7 +45,7 @@ export function OfferScreen(): JSX.Element {
     } else {
       nav(AppRoute.Login);
     }
-  }, [dispatch]);
+  }, [authStatus, dispatch, nav]);
   return (
     <div className="page">
       <Header fromRoot={false}/>
