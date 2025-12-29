@@ -1,4 +1,4 @@
-import Header from '../../components/header.tsx';
+import Header from '../../components/header/header.tsx';
 
 export function OfferNotLoggedScreen(): JSX.Element {
   return (
