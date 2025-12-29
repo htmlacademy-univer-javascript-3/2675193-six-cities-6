@@ -3,7 +3,7 @@ import {useCallback, useMemo, useState} from 'react';
 import {Nullable} from 'vitest';
 import {Map} from '../../components/map/map.tsx';
 import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
-import HeaderMemo from '../../components/header.tsx';
+import HeaderMemo from '../../components/header/header.tsx';
 import CityListMemo from '../../components/city-list/city-list.tsx';
 import {getCity} from '../../store/city-data/selectors.ts';
 import {getOffersInActiveCity} from '../../store/cit-offers-data/selectors.ts';
@@ -33,7 +33,7 @@ export function MainScreen(): JSX.Element {
     } else {
       navigate(AppRoute.Login);
     }
-  }, []);
+  }, [authStatus, dispatch, navigate]);
 
   return (
     <div className="page page--gray page--main">

@@ -1,9 +1,10 @@
-import {useAppSelector} from '../hooks/store-hooks.ts';
-import {AppRoute, AuthorizationStatus} from '../const.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
+import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import {Link} from 'react-router-dom';
-import {getAuthorizationStatus, getEmail} from '../store/user-data/selectors.ts';
+import {getAuthorizationStatus, getEmail} from '../../store/user-data/selectors.ts';
 import React from 'react';
-import {getFavoriteOffersCount} from '../store/favorites-data/selectors.ts';
+import {getFavoriteOffersCount} from '../../store/favorites-data/selectors.ts';
+import {logoutAction} from '../../store/api-actions.ts';
 
 type HeaderProps = {
   fromRoot: boolean;
@@ -13,6 +14,11 @@ function Header({fromRoot}: HeaderProps) {
   const authStatus = useAppSelector(getAuthorizationStatus);
   const userEmail = useAppSelector(getEmail);
   const favouritesCount = useAppSelector(getFavoriteOffersCount);
+  const dispatch = useAppDispatch();
+
+  const onLogout = () => {
+    dispatch(logoutAction());
+  };
 
   return (
     <header className="header">
@@ -41,7 +47,7 @@ function Header({fromRoot}: HeaderProps) {
                     </Link>
                   </li>
                   <li className="header__nav-item">
-                    <Link className="header__nav-link" to={AppRoute.Root}>
+                    <Link className="header__nav-link" to={AppRoute.Root} onClick={onLogout}>
                       <span className="header__signout">Sign out</span>
                     </Link>
                   </li>
