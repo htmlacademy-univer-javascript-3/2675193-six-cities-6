@@ -6,7 +6,7 @@ import {getSendingReviewsStatus} from '../../store/offers-data/selectors.ts';
 
 type StarInputProps = {
   rating: RatingValue;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onHandleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const MIN_MESSAGE_LENGTH = 50;
@@ -21,12 +21,12 @@ const titlesForRate = {
 
 type RatingValue = keyof typeof titlesForRate;
 
-function StarInput({rating, handleChange} :StarInputProps) {
+function StarInput({rating, onHandleChange} :StarInputProps) {
   const id = `${rating}_stars`;
   const title: string = titlesForRate[rating];
   return (
     <Fragment>
-      <input className="form__rating-input visually-hidden" name="rating" value={rating} id={id} type="radio" onChange={handleChange}/>
+      <input className="form__rating-input visually-hidden" name="rating" value={rating} id={id} type="radio" onChange={onHandleChange}/>
       <label htmlFor={id} className="reviews__rating-label form__rating-label" title={title}>
         <svg className="form__star-image" width="37" height="33">
           <use xlinkHref="#icon-star"></use>
@@ -71,7 +71,7 @@ export default function CommentForm({offerId}: CommentFormProps) {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {[5, 4, 3, 2, 1].map((num) =>
-          <StarInput key={num} rating={num as RatingValue} handleChange={handleChange}></StarInput>)}
+          <StarInput key={num} rating={num as RatingValue} onHandleChange={handleChange}></StarInput>)}
       </div>
       <textarea className="reviews__textarea form__textarea" id="reviSew" name="review" placeholder="Tell how was your stay, what you like and what can be improved"
         value={formData.review} onChange={handleChange}

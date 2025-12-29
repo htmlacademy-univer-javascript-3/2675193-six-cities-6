@@ -1,17 +1,20 @@
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store-hooks.ts';
-import {FormEvent, useRef} from 'react';
+import {FormEvent, useEffect, useRef} from 'react';
 import {checkAuthAction, loginAction} from '../../store/api-actions.ts';
 import {getAuthorizationStatus} from '../../store/user-data/selectors.ts';
 
 export function LoginScreen(): JSX.Element {
   checkAuthAction();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  if (authorizationStatus === AuthorizationStatus.Auth){
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    //useNavigate()(AppRoute.Root);
-  }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate('/');
+    }
+  }, [authorizationStatus, navigate]);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);

@@ -1,5 +1,5 @@
 import {MainScreen} from '../pages/main/main-screen.tsx';
-import {Route, Routes} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {LoginScreen} from '../pages/login/login-screen.tsx';
 import {FavoritesScreen} from '../pages/favorites/favorites-screen.tsx';
 import {OfferScreen} from '../pages/offers/offer-screen.tsx';
@@ -10,8 +10,6 @@ import {checkAuthAction, fetchOffersAction, getFavoritesAction} from '../store/a
 import {store} from '../store';
 import {useAppSelector} from '../hooks/store-hooks.ts';
 import {Spinner} from './spinner/spinner.tsx';
-import browserHistory from '../browser-history.ts';
-import HistoryRouter from '../history-router.tsx';
 import {getCommentsLoadingStatus, getLoadingStatus, getNearbyLoadingStatus,} from '../store/offers-data/selectors.ts';
 import {getAuthorizationStatus, getUserLoadingStatus} from '../store/user-data/selectors.ts';
 import {getCityOffersLoadingStatus} from '../store/cit-offers-data/selectors.ts';
@@ -37,7 +35,7 @@ export function App(): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
+    <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root} element={<MainScreen />} />
         <Route path={AppRoute.Login} element={<LoginScreen />}/>
@@ -53,6 +51,6 @@ export function App(): JSX.Element {
         <Route path={AppRoute.Other} element={<NotFoundScreen/>}/>
 
       </Routes>
-    </HistoryRouter>
+    </BrowserRouter>
   );
 }
